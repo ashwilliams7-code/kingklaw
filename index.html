@@ -40,39 +40,7 @@ body {
   color: var(--text);
   background: var(--bg);
   overflow-x: hidden;
-  cursor: none;
 }
-
-/* ═══════════════════════════════ CUSTOM CURSOR */
-.cursor-ring {
-  position: fixed;
-  width: 36px; height: 36px;
-  border: 2px solid var(--coral);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%,-50%);
-  transition: width 0.2s, height 0.2s, border-color 0.2s, background 0.2s;
-  mix-blend-mode: difference;
-}
-.cursor-dot {
-  position: fixed;
-  width: 6px; height: 6px;
-  background: var(--coral);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 10000;
-  transform: translate(-50%,-50%);
-  box-shadow: 0 0 8px var(--coral-glow);
-}
-.cursor-ring.hovering {
-  width: 56px; height: 56px;
-  background: rgba(255,92,92,0.08);
-  border-color: var(--teal);
-}
-@media (hover: none) {
-  .cursor-ring, .cursor-dot { display: none; }
-  body { cursor: auto; }
 }
 
 /* ═══════════════════════════════ INTRO LOADER */
@@ -685,8 +653,6 @@ a.link-grow:hover::after { width: 100%; }
 <body>
 
 <!-- Custom cursor -->
-<div class="cursor-ring" id="cursorRing"></div>
-<div class="cursor-dot" id="cursorDot"></div>
 
 <!-- Intro loader -->
 <div id="loader">
@@ -965,7 +931,7 @@ a.link-grow:hover::after { width: 100%; }
         <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">Drafts personalised client emails from CRM data. Handles follow-ups, updates, and compliance disclosures.</p>
         <div style="display:flex; align-items:center; justify-content:space-between;">
           <span style="font-size:12px; color:var(--text-muted);">⬇ 12,400 installs</span>
-          <button class="btn btn-glass" style="padding:7px 16px; font-size:12px; cursor:none;">Install</button>
+          <button class="btn btn-glass" style="padding:7px 16px; font-size:12px; cursor:pointer;">Install</button>
         </div>
       </div>
       <div class="glass card-shine reveal" style="padding:24px; transition-delay:0.07s">
@@ -980,7 +946,7 @@ a.link-grow:hover::after { width: 100%; }
         <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">AFSL-aware document checking. Flags issues before they reach clients or regulators.</p>
         <div style="display:flex; align-items:center; justify-content:space-between;">
           <span style="font-size:12px; color:var(--text-muted);">⬇ 8,900 installs</span>
-          <button class="btn btn-glass" style="padding:7px 16px; font-size:12px; cursor:none;">Install</button>
+          <button class="btn btn-glass" style="padding:7px 16px; font-size:12px; cursor:pointer;">Install</button>
         </div>
       </div>
       <div class="glass card-shine reveal" style="padding:24px; transition-delay:0.14s">
@@ -994,7 +960,7 @@ a.link-grow:hover::after { width: 100%; }
         <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">Bi-directional sync with Salesforce, HubSpot, and Pipedrive. Zero manual data entry.</p>
         <div style="display:flex; align-items:center; justify-content:space-between;">
           <span style="font-size:12px; color:var(--text-muted);">⬇ 21,100 installs</span>
-          <button class="btn btn-glass" style="padding:7px 16px; font-size:12px; cursor:none;">Install</button>
+          <button class="btn btn-glass" style="padding:7px 16px; font-size:12px; cursor:pointer;">Install</button>
         </div>
       </div>
       <div class="glass card-shine reveal" style="padding:24px; transition-delay:0.2s">
@@ -1008,7 +974,7 @@ a.link-grow:hover::after { width: 100%; }
         <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">Auto-generates weekly performance reports, client updates, and board summaries.</p>
         <div style="display:flex; align-items:center; justify-content:space-between;">
           <span style="font-size:12px; color:var(--text-muted);">⬇ 5,600 installs</span>
-          <button class="btn btn-glass" style="padding:7px 16px; font-size:12px; cursor:none;">Install</button>
+          <button class="btn btn-glass" style="padding:7px 16px; font-size:12px; cursor:pointer;">Install</button>
         </div>
       </div>
       <div class="glass card-shine reveal" style="padding:24px; transition-delay:0.27s">
@@ -1022,7 +988,7 @@ a.link-grow:hover::after { width: 100%; }
         <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">AI-powered scheduling that reads intent from emails and books meetings automatically.</p>
         <div style="display:flex; align-items:center; justify-content:space-between;">
           <span style="font-size:12px; color:var(--text-muted);">⬇ 9,300 installs</span>
-          <button class="btn btn-glass" style="padding:7px 16px; font-size:12px; cursor:none;">Install</button>
+          <button class="btn btn-glass" style="padding:7px 16px; font-size:12px; cursor:pointer;">Install</button>
         </div>
       </div>
       <div class="glass reveal" style="padding:24px; transition-delay:0.34s; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; border:1px dashed var(--border-hi);">
@@ -1332,14 +1298,6 @@ document.addEventListener('mousemove', e => {
   dot.style.top  = mouseY + 'px';
 });
 
-function lerpCursor() {
-  ringX = lerp(ringX, mouseX, 0.12);
-  ringY = lerp(ringY, mouseY, 0.12);
-  ring.style.left = ringX + 'px';
-  ring.style.top  = ringY + 'px';
-  requestAnimationFrame(lerpCursor);
-}
-lerpCursor();
 
 // Magnetic pull on buttons
 document.querySelectorAll('.btn, button').forEach(el => {
