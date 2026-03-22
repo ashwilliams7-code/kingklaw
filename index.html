@@ -1318,36 +1318,7 @@ document.querySelectorAll('.btn, button').forEach(el => {
 /* ── Lerp helper ── */
 function lerp(a, b, t) { return a + (b - a) * t; }
 
-/* ── Smooth lerp scroll (desktop only) ── */
-if (window.matchMedia('(hover: hover)').matches && window.innerWidth > 900) {
-  let scrollCurrent = 0;
-  let scrollTarget  = 0;
-  let ticking = false;
-
-  window.addEventListener('wheel', e => {
-    e.preventDefault();
-    scrollTarget += e.deltaY * 0.8;
-    scrollTarget = Math.max(0, Math.min(scrollTarget, document.body.scrollHeight - window.innerHeight));
-  }, { passive: false });
-
-  function smoothScroll() {
-    scrollCurrent = lerp(scrollCurrent, scrollTarget, 0.08);
-    window.scrollTo(0, scrollCurrent);
-    requestAnimationFrame(smoothScroll);
-  }
-  smoothScroll();
-
-  // Also allow anchor links to work
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        scrollTarget = target.offsetTop - 80;
-      }
-    });
-  });
-}
+/* ── Smooth lerp scroll removed — was breaking slider and pointer events ── */
 
 /* ── Nav scroll ── */
 const nav = document.getElementById('nav');
